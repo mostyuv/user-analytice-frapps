@@ -1,0 +1,9 @@
+{
+    "name": "用户增长数据报表",
+    "module": "User Analytics",
+    "ref_doctype": "User Service Event",
+    "report_type": "Script Report",
+    "is_standard": "Yes",
+    "doctype": "User Service Event",
+    "icon": "octicon octicon-bar-chart"
+}

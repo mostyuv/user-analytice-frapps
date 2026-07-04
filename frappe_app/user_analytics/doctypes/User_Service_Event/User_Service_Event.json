@@ -1,0 +1,103 @@
+{
+    "name": "User Service Event",
+    "module": "User Analytics",
+    "document_type": "Document",
+    "title_field": "user_name",
+    "is_submittable": 0,
+    "is_tree": 0,
+    "is_published": 0,
+    "is_standard": "Yes",
+    "fields": [
+        {
+            "fieldname": "user_name",
+            "label": "用户姓名",
+            "fieldtype": "Data",
+            "reqd": 1,
+            "search_index": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "service_plan",
+            "label": "服务套餐",
+            "fieldtype": "Select",
+            "options": "\n基础版\n专业版\n企业版",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "event_type",
+            "label": "事件类型",
+            "fieldtype": "Select",
+            "options": "\n开通\n流失\n续费",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "event_date",
+            "label": "事件日期",
+            "fieldtype": "Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "channel",
+            "label": "渠道",
+            "fieldtype": "Select",
+            "options": "\n官网\n线下销售\n合作伙伴\n其他"
+        },
+        {
+            "fieldname": "region",
+            "label": "地区",
+            "fieldtype": "Select",
+            "options": "\n华东\n华南\n华北\n西南\n海外"
+        },
+        {
+            "fieldname": "revenue",
+            "label": "收入",
+            "fieldtype": "Currency",
+            "precision": 2
+        },
+        {
+            "fieldname": "is_active",
+            "label": "是否活跃",
+            "fieldtype": "Check",
+            "default": 1
+        },
+        {
+            "fieldname": "remarks",
+            "label": "备注",
+            "fieldtype": "Small Text"
+        }
+    ],
+    "permissions": [
+        {
+            "role": "System Manager",
+            "read": 1,
+            "write": 1,
+            "create": 1,
+            "delete": 1
+        },
+        {
+            "role": "User",
+            "read": 1
+        },
+        {
+            "role": "Guest",
+            "read": 1
+        }
+    ],
+    "indexes": [
+        {
+            "fields": ["event_date"],
+            "index_type": "BTREE"
+        },
+        {
+            "fields": ["event_type"],
+            "index_type": "BTREE"
+        },
+        {
+            "fields": ["region"],
+            "index_type": "BTREE"
+        }
+    ]
+}
