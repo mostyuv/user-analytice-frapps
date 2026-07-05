@@ -46,35 +46,40 @@ def execute(filters=None):
         end_date = getdate()
         start_date = add_days(end_date, -days + 1)
 
+        rows = frappe.db.sql("""
+            SELECT
+                DATE(event_date) as date,
+                SUM(CASE WHEN event_type = '开通' THEN 1 ELSE 0 END) as activations,
+                SUM(CASE WHEN event_type = '流失' THEN 1 ELSE 0 END) as churns,
+                SUM(CASE WHEN event_type IN ('开通', '续费') THEN revenue ELSE 0 END) as revenue
+            FROM `tabUser Service Event`
+            WHERE event_date BETWEEN %s AND %s
+            GROUP BY DATE(event_date)
+            ORDER BY date
+        """, (start_date, end_date), as_dict=True)
+
+        row_map = {str(r.date): r for r in rows}
+
         for i in range(days):
             current_date = add_days(start_date, i)
-            date_str = current_date.strftime("%Y-%m-%d")
+            date_key = str(current_date)
 
-            activations = frappe.db.count(
-                "User Service Event",
-                filters={"event_type": "开通", "event_date": date_str}
-            )
-
-            churns = frappe.db.count(
-                "User Service Event",
-                filters={"event_type": "流失", "event_date": date_str}
-            )
-
-            revenue = frappe.db.sum(
-                "User Service Event",
-                "revenue",
-                filters={
-                    "event_type": ["in", ["开通", "续费"]],
-                    "event_date": date_str
-                }
-            ) or 0
+            if date_key in row_map:
+                r = row_map[date_key]
+                activations = int(r.activations or 0)
+                churns = int(r.churns or 0)
+                revenue = flt(r.revenue or 0, 2)
+            else:
+                activations = 0
+                churns = 0
+                revenue = 0
 
             data.append({
-                "date": date_str,
+                "date": current_date,
                 "activations": activations,
                 "churns": churns,
                 "net_growth": activations - churns,
-                "revenue": flt(revenue, 2)
+                "revenue": revenue
             })
 
     return columns, data

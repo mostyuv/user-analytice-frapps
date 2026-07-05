@@ -7,6 +7,8 @@
     "is_tree": 0,
     "is_published": 0,
     "is_standard": "Yes",
+    "autoname": "format:USE-{YYYY}-{#####}",
+    "naming_rule": "Expression",
     "fields": [
         {
             "fieldname": "user_name",
@@ -49,7 +51,8 @@
             "fieldname": "region",
             "label": "地区",
             "fieldtype": "Select",
-            "options": "\n华东\n华南\n华北\n西南\n海外"
+            "options": "\n华东\n华南\n华北\n西南\n海外",
+            "search_index": 1
         },
         {
             "fieldname": "revenue",
@@ -84,20 +87,6 @@
         {
             "role": "Guest",
             "read": 1
-        }
-    ],
-    "indexes": [
-        {
-            "fields": ["event_date"],
-            "index_type": "BTREE"
-        },
-        {
-            "fields": ["event_type"],
-            "index_type": "BTREE"
-        },
-        {
-            "fields": ["region"],
-            "index_type": "BTREE"
         }
     ]
 }

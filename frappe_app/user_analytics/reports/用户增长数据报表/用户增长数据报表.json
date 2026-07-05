@@ -4,6 +4,15 @@
     "ref_doctype": "User Service Event",
     "report_type": "Script Report",
     "is_standard": "Yes",
-    "doctype": "User Service Event",
-    "icon": "octicon octicon-bar-chart"
+    "doctype": "Report",
+    "icon": "octicon octicon-bar-chart",
+    "filters": [
+        {
+            "fieldname": "days",
+            "label": "统计天数",
+            "fieldtype": "Int",
+            "default": "30",
+            "reqd": 1
+        }
+    ]
 }
