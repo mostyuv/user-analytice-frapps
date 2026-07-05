@@ -147,6 +147,7 @@ def export_csv(days=30):
     )
 
     output = StringIO()
+    output.write('\ufeff')
     writer = csv.writer(output)
     writer.writerow(["用户姓名", "服务套餐", "事件类型", "事件日期", "地区", "渠道", "收入", "是否活跃"])
 

@@ -648,7 +648,7 @@
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
                     if (data.message) {
-                        var blob = new Blob([data.message], { type: 'text/csv' });
+                        var blob = new Blob(['\ufeff', data.message], { type: 'text/csv;charset=utf-8' });
                         var url = URL.createObjectURL(blob);
                         var a = document.createElement('a');
                         a.href = url;
