@@ -105,6 +105,10 @@ docker-compose logs -f create-site
 | 后台登录 | http://localhost:8080/login |
 | 管理员账号 | `Administrator` / 见 `.env` 中 `ADMIN_PASSWORD` |
 
+## 安全说明
+
+本项目为演示/考核用途，数据大屏 API 和 CSV 导出接口设置了 `allow_guest=True`，允许未登录用户访问。**生产环境部署时应改为 `allow_guest=False`，并配置适当的角色权限。**
+
 ## License
 
 MIT
